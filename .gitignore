@@ -1,0 +1,5 @@
+scratch/
+*.pyc
+*local.bat
+*.lock
+*.log
