@@ -35,7 +35,6 @@ Clip to borough boundaries, clean up artifacts, and export to shapefile.
 ## Teardown
 
 ```shell
-$ export SCRATCHPASSWORD=<samplepassword>
 $ export PGUSER=****
 $ export PGPASSWORD=****
 $ export PGHOST=****
