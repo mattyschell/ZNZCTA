@@ -8,4 +8,4 @@ echo "[STEP] convert in/zcta.geojson to in/zcta.shp"
 ogr2ogr -t_srs EPSG:2263 in/zcta.shp in/zcta.geojson
 echo "[STEP] convert in/zcta.shp to in/zcta.sql"
 shp2pgsql -s 2263 -c in/zcta.shp zcta > in/zcta.sql
-echo "[DONE] generate-data complete"
+echo "[DONE] generate complete"
