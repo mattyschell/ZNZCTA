@@ -8,25 +8,47 @@ with boroughblob as (
             from borough) t
         cross join lateral (
 	    select
-		    ST_MakePolygon( ST_ExteriorRing(p.geom)
-		                   , array( select 
+		    ST_MakePolygon(ST_ExteriorRing(p.geom)
+		                  ,array(
+                             select 
 		                       ST_InteriorRingN(p.geom, n) 
 		                       from 
-		                       generate_series(1, ST_NumInteriorRings(p.geom)) as n 
-		                       where ST_Area(ST_InteriorRingN(p.geom, n)) > 10 ) ) as geom
+		                         generate_series(1
+                                                ,ST_NumInteriorRings(p.geom)) as n 
+		                       where 
+                                 ST_Area(ST_InteriorRingN(p.geom, n)) > 10 
+                                )
+                          ) as geom
 	    from
-		    ST_Dump(t.geom) as p ) as cleaned
+		    ST_Dump(t.geom) as p) as cleaned
         )
 select 
-    a.basename as basename, 
-    ST_Intersection(a.geom, b.geom) as geom
+     a.gid
+    ,a.mtfcc
+    --,a.__oid dropping the esri rest objectid. reserved in postgresql
+    ,a.geoid
+    ,a.basename
+    ,a.name
+    ,a.lsadc
+    ,a.funcstat
+    ,a.arealand
+    ,a.areawater
+    ,a.centlat
+    ,a.centlon
+    ,a.intptlat
+    ,a.intptlon
+    ,a.zcta5cc
+    ,a.zcta5
+    ,a.hu100
+    ,a.pop100
+    ,ST_Intersection(a.geom, b.geom) as geom
 from 
     zcta a 
 cross join
     boroughblob b
 where 
     st_intersects(a.geom,b.geom);
--- validate geometry
+-- validate post-clip geometry
 select
     case when COUNT(*) > 0 
     then
@@ -34,9 +56,9 @@ select
     else 
        'PASS: all clipped zcta geometries are valid' 
     end as status
-from cliptza
+from cliptza 
 where not st_isvalid(geom);
--- as of now 9 zctas fully enclose other zctas
+-- as of now 9 znzctas fully enclose other znzctas.
 select
     case when COUNT(*) = 9 
     then
@@ -57,4 +79,4 @@ select
     else 
        'PASS: 224 clipped zctas' 
     end as status
-from cliptza
+from cliptza;
