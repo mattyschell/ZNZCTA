@@ -4,48 +4,38 @@
 
 There is a demand for New York City ZIP code polygons even though [there is no such thing](https://github.com/mattyschell/nyc-spatial-rolodex/wiki/Zip-Codes). Someone will supply this demand so let it be supplied with the least bad ZIP code polygons. Friends, this is our bad ZIP code polygon supply, our rules, the trick is never to be afraid.
 
-Visualize on GitHub by clicking znzcta.geojson geojson below.
+[Click here to visualize ZNZCTAs on github](out/geojson/znzcta.geojson)
 
-## Set Up PostGIS Scratch Database
+## Prerequisites
 
-Prerequisite: https://github.com/mattyschell/howdoipostgis
+1. [PostGIS](https://github.com/mattyschell/howdoipostgis)
+2. [ogr2ogr](https://gdal.org/en/stable/programs/ogr2ogr.html) (Comes with QGIS at C:\Program Files\QGIS version number\bin\)
+
+## Create ZNZCTAS
+
+1. Set Up PostGIS Scratch Database
+2. Fetch and load input data
+3. Process and export
+
+Fetches selected US Census Bureau ZCTAS, clips to borough boundaries, cleans up artifacts, and exports to shapefile and geojson.
 
 ```shell
 $ export SCRATCHPASSWORD=<samplepassword>
-$ export PGUSER=****
-$ export PGPASSWORD=****
-$ export PGHOST=****
+$ export PGPASSWORD=********
+$ export PGHOST=localhost
+$ export PGUSER=postgres
 $ export PGDATABASE=postgres
-$ ./setup.sh 
+$ ./setup.sh
+$ export PGPASSWORD=$SCRATCHPASSWORD
+$ ./generate-load.sh
+$ ./process-export.sh
 ```
 
-## Generate and load input data 
-
-Extracts ZCTAs from the US Census Bureau REST service and loads to PostGIS.
+## Teardown Scratch Database
 
 ```shell
-$ export PGPASSWORD=<samplepassword>
-$ export PGHOST=****
-$ ./generate-load.sh 
-```
-
-## Process and export
-
-Clip to borough boundaries, clean up artifacts, and export to shapefile and geojson.
-
-```shell
-$ export PGPASSWORD=<samplepassword>
-$ export PGHOST=****
-$ ./process-export.sh 
-```
-
-
-## Teardown
-
-```shell
-$ export PGUSER=****
 $ export PGPASSWORD=****
-$ export PGHOST=****
+$ export PGHOST=localhost
+$ export PGUSER=postgres
 $ export PGDATABASE=postgres
 $ ./teardown.sh
-```

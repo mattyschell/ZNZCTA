@@ -2,4 +2,4 @@
 export PGDATABASE=scratchznzcta
 export PGUSER=znzcta
 ./out/process.sh
-#./out/export.sh
+./out/export.sh
