@@ -39,3 +39,13 @@ $ export PGHOST=localhost
 $ export PGUSER=postgres
 $ export PGDATABASE=postgres
 $ ./teardown.sh
+```
+
+## Review
+
+1. Visualize the shapefile in QGIS. 
+2. Open the attribute table in QGIS
+3. Visualize the shapefile in ArcGIS Pro
+4. Open the attribute table in ArcGIS Pro
+5. Open the shapefile .dbf in Excel
+6. Verify that the .cpg file is good (should be UTF-8)
