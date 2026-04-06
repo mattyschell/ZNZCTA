@@ -2,7 +2,7 @@
 
 **Z**NZCTAs are **N**ot **ZCTA**s.  
 
-There is a demand for New York City ZIP code polygons even though [there is no such thing](https://github.com/mattyschell/nyc-spatial-rolodex/wiki/Zip-Codes). Someone will supply this demand so let it be supplied with the least bad ZIP code polygons. Friends, this is our bad ZIP code polygon supply, our rules, the trick is never to be afraid.
+There is a demand for New York City ZIP code polygons even though [there is no such thing](https://github.com/mattyschell/nyc-spatial-rolodex/blob/main/wiki/ZIP-Codes.md). Someone will supply this demand so let it be supplied with the least bad ZIP code polygons. Friends, this is our bad ZIP code polygon supply, our rules, the trick is never to be afraid.
 
 [Click here to visualize ZNZCTAs on github](out/geojson/znzcta.geojson)
 
